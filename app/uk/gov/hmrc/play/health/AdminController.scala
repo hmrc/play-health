@@ -1,6 +1,7 @@
 package uk.gov.hmrc.play.health
 
-import play.api.Play
+import com.typesafe.config.ConfigRenderOptions
+import play.api.{Configuration, Play}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
@@ -26,6 +27,15 @@ trait AdminController extends Controller {
 
   def details() = Action {
     Ok(Json.toJson(manifest.contents))
+  }
+
+  val conf = Action {
+    val validJson: ConfigRenderOptions = ConfigRenderOptions.defaults()
+      .setOriginComments(false)
+      .setComments(false)
+      .setJson(true)
+
+    Ok(Play.current.configuration.underlying.root().render(validJson))
   }
 
   def detail(name: String) = Action {

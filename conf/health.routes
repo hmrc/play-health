@@ -3,4 +3,6 @@
 # ~~~~
 GET     /ping/ping       uk.gov.hmrc.play.health.AdminController.ping
 GET     /admin/details   uk.gov.hmrc.play.health.AdminController.details
+GET     /admin/conf      uk.gov.hmrc.play.health.AdminController.conf
+
 

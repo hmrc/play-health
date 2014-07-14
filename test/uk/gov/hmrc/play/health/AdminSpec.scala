@@ -3,7 +3,7 @@ package uk.gov.hmrc.play.health
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
 import org.scalatest.{ShouldMatchers, FunSpec}
 import play.api.test._
-import play.api.libs.ws.WS
+import play.api.libs.ws.{Response, WS}
 
 class AdminSpec extends FunSpec with ShouldMatchers with PlayRunners with ScalaFutures with DefaultAwaitTimeout with IntegrationPatience {
 
@@ -29,4 +29,14 @@ class AdminSpec extends FunSpec with ShouldMatchers with PlayRunners with ScalaF
     }
   }
 
+  describe("configuration endpoint") {
+    it("should respond with a 200 and the Play config") {
+      running(TestServer(3333, new FakeApplication(additionalConfiguration = Map("configKey" -> "value")))) {
+        val response = WS.url("http://localhost:3333/admin/conf").get.futureValue
+
+        response.status shouldBe 200
+        response.body should include( """"configKey" : "value"""")
+      }
+    }
+  }
 }
