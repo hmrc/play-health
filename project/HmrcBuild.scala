@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 import play.Project._
 
-object Build extends Build {
+object HmrcBuild extends Build {
 
   import uk.gov.hmrc.DefaultBuildSettings
 
