@@ -9,8 +9,8 @@ object HealthController extends HealthController{
   import play.api.Play.current
 
   def service = new HealthService(){
-    val vendor = Play.configuration.getString("health.vendor").getOrElse{
-      throw new IllegalArgumentException("no config value for key 'health.vendor'")
+    def appName = Play.configuration.getString("appName").getOrElse{
+      throw new IllegalArgumentException("no config value for key 'appName'")
     }
   }
 
