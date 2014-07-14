@@ -18,14 +18,15 @@ class AdminSpec extends FunSpec with ShouldMatchers with PlayRunners with ScalaF
   describe("details endpoint") {
     it("should respond with a 200 when service is configured with an appName") {
       running(TestServer(3333, new FakeApplication(additionalConfiguration = Map("appName" -> "play-health")))) {
-        WS.url("http://localhost:3333/ping/details").get.futureValue.status shouldBe 200
+        WS.url("http://localhost:3333/admin/details").get.futureValue.status shouldBe 200
       }
     }
 
     it("should respond with a 500 status code when an 'appName' value is not present in the config") {
       running(TestServer(3333, new FakeApplication(additionalConfiguration = Map()))) {
-        WS.url("http://localhost:3333/ping/details").get.futureValue.status shouldBe 500
+        WS.url("http://localhost:3333/admin/details").get.futureValue.status shouldBe 500
       }
     }
   }
+
 }
