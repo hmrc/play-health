@@ -13,7 +13,7 @@ class AdminSpec extends WordSpec with ShouldMatchers with PlayRunners with Scala
   }
 
   abstract class ServerWithConfig(conf: Map[String, String] = Map.empty) extends
-    WithServer(FakeApplication(additionalConfiguration = conf)) with Resource
+  WithServer(FakeApplication(additionalConfiguration = conf)) with Resource
 
 
   "The Ping endpoint" should {
@@ -43,3 +43,4 @@ class AdminSpec extends WordSpec with ShouldMatchers with PlayRunners with Scala
         }
     }
   }
+}
