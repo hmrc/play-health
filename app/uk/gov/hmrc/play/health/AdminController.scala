@@ -4,11 +4,11 @@ import play.api.Play
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
-object HealthController extends HealthController{
+object AdminController extends AdminController{
 
   import play.api.Play.current
 
-  def service = new HealthService(){
+  def manifest = new Manifest(){
     def appName = Play.configuration.getString("appName").getOrElse{
       throw new IllegalArgumentException("no config value for key 'appName'")
     }
@@ -16,20 +16,20 @@ object HealthController extends HealthController{
 
 }
 
-trait HealthController extends Controller {
+trait AdminController extends Controller {
 
-  protected def service:HealthService
+  protected def manifest:Manifest
 
   def ping = Action {
     Ok
   }
 
   def details() = Action {
-    Ok(Json.toJson(service.manifest))
+    Ok(Json.toJson(manifest.contents))
   }
 
   def detail(name: String) = Action {
-    service.manifest.get(name) match {
+    manifest.contents.get(name) match {
       case Some(m) => Ok(m)
       case None    => NotFound
     }

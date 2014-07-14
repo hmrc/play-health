@@ -5,13 +5,13 @@ import java.util.jar
 import play.api.Play
 import collection.JavaConversions._
 
-trait HealthService {
+trait Manifest {
 
   import play.api.Play.current
 
   protected def appName:String
 
-  lazy val manifest: Map[String, String] = resources.foldLeft(Map.empty[String, String]) { (map, url) =>
+  lazy val contents: Map[String, String] = resources.foldLeft(Map.empty[String, String]) { (map, url) =>
     val manifest = new java.util.jar.Manifest(url.openStream())
     if (map.isEmpty && isApplicationManifest(manifest)) {
       manifest.getMainAttributes.toMap.map {
