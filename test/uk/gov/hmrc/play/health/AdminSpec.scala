@@ -32,15 +32,5 @@ class AdminSpec extends WordSpec with ShouldMatchers with PlayRunners with Scala
       new ServerWithConfig(Map.empty) {
         resource("/admin/details").status shouldBe 500
       }
-
-    "The configuration endpoint" should {
-      "respond with a 200 and the Play config" in
-        new ServerWithConfig(Map("configKey" -> "value")) {
-          val response = resource("/admin/conf")
-
-          response.status shouldBe 200
-          response.body should include( """"configKey" : "value"""")
-        }
-    }
   }
 }

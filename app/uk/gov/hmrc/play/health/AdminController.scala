@@ -29,15 +29,6 @@ trait AdminController extends Controller {
     Ok(Json.toJson(manifest.contents))
   }
 
-  val conf = Action {
-    val validJson: ConfigRenderOptions = ConfigRenderOptions.defaults()
-      .setOriginComments(false)
-      .setComments(false)
-      .setJson(true)
-
-    Ok(Play.current.configuration.underlying.root().render(validJson))
-  }
-
   def detail(name: String) = Action {
     manifest.contents.get(name) match {
       case Some(m) => Ok(m)

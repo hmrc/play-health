@@ -7,7 +7,7 @@ object HmrcBuild extends Build {
   import uk.gov.hmrc.DefaultBuildSettings
 
   val nameApp = "play-health"
-  val versionApp = "0.1.0"
+  val versionApp = "0.2.0"
 
   val appDependencies = Seq(
     "org.scalatest" %% "scalatest" % "2.2.0",
