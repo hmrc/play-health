@@ -1,8 +1,8 @@
 package uk.gov.hmrc.play.health
 
-import org.scalatest.{ShouldMatchers, FunSpec}
-import play.api.test.{DefaultAwaitTimeout, FutureAwaits, PlayRunners, TestServer}
+import org.scalatest.{FunSpec, ShouldMatchers}
 import play.api.libs.ws.WS
+import play.api.test.{DefaultAwaitTimeout, FutureAwaits, PlayRunners, TestServer}
 
 class HealthSpec extends FunSpec with ShouldMatchers with PlayRunners with FutureAwaits with DefaultAwaitTimeout {
 
