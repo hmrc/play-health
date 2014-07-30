@@ -12,9 +12,10 @@ class AdminSpec extends WordSpec with ShouldMatchers with PlayRunners with Scala
     def resource(path: String) = WS.url(s"http://localhost:$port" + path).get().futureValue
   }
 
-  abstract class ServerWithConfig(conf: Map[String, String] = Map.empty) extends
-  WithServer(FakeApplication(additionalConfiguration = conf)) with Resource
+  val testConfig = Map("application.router" -> "health.Routes")
 
+  abstract class ServerWithConfig(conf: Map[String, String] = Map.empty) extends
+    WithServer(FakeApplication(additionalConfiguration = testConfig ++ conf)) with Resource
 
   "The Ping endpoint" should {
     "respond with a 200 status code when the service is OK" in new ServerWithConfig(Map("application.router" -> "health.Routes")) {
