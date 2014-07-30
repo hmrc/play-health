@@ -12,24 +12,25 @@ class AdminSpec extends WordSpec with ShouldMatchers with PlayRunners with Scala
     def resource(path: String) = WS.url(s"http://localhost:$port" + path).get().futureValue
   }
 
-  abstract class ServerWithConfig(conf: Map[String, String] = Map.empty) extends
-  WithServer(FakeApplication(additionalConfiguration = conf)) with Resource
+  val testConfig = Map("application.router" -> "health.Routes")
 
+  abstract class ServerWithConfig(conf: Map[String, String] = Map.empty) extends
+    WithServer(FakeApplication(additionalConfiguration = testConfig ++ conf)) with Resource
 
   "The Ping endpoint" should {
-    "respond with a 200 status code when the service is OK" in new ServerWithConfig {
+    "respond with a 200 status code when the service is OK" in new ServerWithConfig(Map("application.router" -> "health.Routes")) {
       resource("/ping/ping").status shouldBe 200
     }
   }
 
   "The details endpoint" should {
     "respond with a 200 when service is configured with an appName" in
-      new ServerWithConfig(Map("appName" -> "play-health")) {
+      new ServerWithConfig(Map("appName" -> "play-health", "application.router" -> "health.Routes")) {
         resource("/admin/details").status shouldBe 200
       }
 
     "respond with a 500 status code when an 'appName' value is not present in the config" in
-      new ServerWithConfig(Map.empty) {
+      new ServerWithConfig(Map("application.router" -> "health.Routes")) {
         resource("/admin/details").status shouldBe 500
       }
   }
