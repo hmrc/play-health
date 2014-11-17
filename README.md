@@ -1,6 +1,6 @@
 #Play Health Plugin
 
-Plugin to provide common health check functionality for Play 2.2.3 projects.
+Plugin to provide common health check functionality for Play +2.2.3 projects.
 
 ##Endpoints
 
@@ -16,10 +16,14 @@ This adds two endpoints:
 Add the jar to the projects dependencies:
 
 ```
-    Project("myProject).settings(libraryDependencies += "uk.gov.hmrc" %% "play-health" % "0.2.0")
+    "uk.gov.hmrc" %% "play-health" % "0.5.0"
 ```
 
-Currently, the plugin is only available for version 2.2.3 of Play, and 2.10 of Scala.
+Add plugin to play.plugins:
+
+```
+    {priority}:uk.gov.hmrc.play.health.HealthPlugin
+```
 
 Additionally, add the following to the routes file:
 
