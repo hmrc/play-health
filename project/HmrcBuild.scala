@@ -11,7 +11,7 @@ object HmrcBuild extends Build {
   import play.PlayImport._
 
   val nameApp = "play-health"
-  val versionApp = "0.7.0"
+  val versionApp = "0.7.0-SNAPSHOT"
 
   val appDependencies = Seq(
     "com.typesafe.play" %% "play" % PlayVersion.current,
