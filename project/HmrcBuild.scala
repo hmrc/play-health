@@ -11,7 +11,7 @@ object HmrcBuild extends Build {
   import play.PlayImport._
 
   val nameApp = "play-health"
-  val versionApp = "0.6.0"
+  val versionApp = "0.7.0"
 
   val appDependencies = Seq(
     "com.typesafe.play" %% "play" % PlayVersion.current,
@@ -35,7 +35,7 @@ object HmrcBuild extends Build {
       "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
       "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
       ),
-      crossScalaVersions := Seq("2.11.4")
+      crossScalaVersions := Seq("2.11.5")
     )
     .settings(SbtBuildInfo(): _*)
     .settings(SonatypeBuild(): _*)
