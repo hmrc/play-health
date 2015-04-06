@@ -1,5 +1,8 @@
 #Play Health Plugin
 
+[![Build Status](https://travis-ci.org/hmrc/play-health.svg)](https://travis-ci.org/hmrc/play-health) [ ![Download](https://api.bintray.com/packages/hmrc/releases/play-health/images/download.svg) ](https://bintray.com/hmrc/releases/play-health/_latestVersion)
+
+
 Plugin to provide common health check functionality for Play +2.2.3 projects.
 
 ##Endpoints
@@ -35,3 +38,7 @@ Additionally, add the following to the routes file:
 
 The plugin expects to find the apps name in the `application.conf` under the key `appName`.
 For the `/admin/details` endpoint to work as expected, the applications `manifest.mf` must include a key `Implementation-Title` with the same value as `appName`.
+
+## License ##
+ 
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
