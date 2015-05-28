@@ -1,16 +1,18 @@
+import _root_.play.core.PlayVersion
+import sbt.Keys._
 import sbt._
-import Keys._
+import uk.gov.hmrc.DefaultBuildSettings._
+import uk.gov.hmrc._
+import uk.gov.hmrc.versioning.SbtGitVersioning
 
 object HmrcBuild extends Build {
 
   import uk.gov.hmrc.DefaultBuildSettings
   import DefaultBuildSettings._
-  import uk.gov.hmrc.{SbtBuildInfo, ShellPrompt}
   import play.core.PlayVersion
   import play.PlayImport._
 
   val nameApp = "play-health"
-  val versionApp = "0.9.0-SNAPSHOT"
 
   val appDependencies = Seq(
     "com.typesafe.play" %% "play" % PlayVersion.current,
@@ -20,19 +22,14 @@ object HmrcBuild extends Build {
   )
 
   lazy val playHealth = Project(nameApp, file("."))
-    .enablePlugins(play.PlayScala)
-    .settings(version := versionApp)
-    .settings(scalaSettings : _*)
-    .settings(defaultSettings() : _*)
+    .enablePlugins(play.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
       targetJvm := "jvm-1.7",
-      shellPrompt := ShellPrompt(versionApp),
       libraryDependencies ++= appDependencies,
+      crossScalaVersions := Seq("2.11.5"),
       resolvers := Seq(
-        Opts.resolver.sonatypeReleases
-      ),
-      crossScalaVersions := Seq("2.11.5")
+        Resolver.bintrayRepo("hmrc", "releases")
+      )
     )
-    .settings(SbtBuildInfo(): _*)
 
 }
