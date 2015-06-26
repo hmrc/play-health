@@ -17,18 +17,18 @@ object HmrcBuild extends Build {
   val appDependencies = Seq(
     "com.typesafe.play" %% "play" % PlayVersion.current,
     ws % "provided",
-    "org.scalatest" %% "scalatest" % "2.2.1" % "test",
+    "org.scalatest" %% "scalatest" % "2.2.4" % "test",
     "org.pegdown" % "pegdown" % "1.4.2" % "test"
   )
 
   lazy val playHealth = Project(nameApp, file("."))
     .enablePlugins(play.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
-      targetJvm := "jvm-1.7",
       libraryDependencies ++= appDependencies,
-      crossScalaVersions := Seq("2.11.5"),
+      crossScalaVersions := Seq("2.11.7"),
       resolvers := Seq(
-        Resolver.bintrayRepo("hmrc", "releases")
+        Resolver.bintrayRepo("hmrc", "releases"),
+        Resolver.typesafeRepo("releases")
       )
     )
 
