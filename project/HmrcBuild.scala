@@ -24,6 +24,8 @@ object HmrcBuild extends Build {
   lazy val playHealth = Project(nameApp, file("."))
     .enablePlugins(play.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
+      targetJvm := "jvm-1.7",
+      scalaVersion := "2.11.7",
       libraryDependencies ++= appDependencies,
       crossScalaVersions := Seq("2.11.7"),
       resolvers := Seq(
