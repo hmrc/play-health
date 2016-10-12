@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 HM Revenue & Customs
+ * Copyright 2016 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,20 @@
 
 package uk.gov.hmrc.play.health
 
-import com.typesafe.config.ConfigRenderOptions
-import play.api.{Configuration, Play}
+import javax.inject.{Inject, Singleton}
+
+import play.api.Configuration
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
-object AdminController extends AdminController{
+@Singleton
+class AdminController @Inject()(configuration: Configuration) extends Controller {
 
-  import play.api.Play.current
-
-  def manifest = new Manifest(){
-    def appName = Play.configuration.getString("appName").getOrElse{
+  protected def manifest = new Manifest() {
+    def appName = configuration.getString("appName").getOrElse{
       throw new IllegalArgumentException("no config value for key 'appName'")
     }
   }
-
-}
-
-trait AdminController extends Controller {
-
-  protected def manifest:Manifest
 
   def ping = Action {
     Ok
