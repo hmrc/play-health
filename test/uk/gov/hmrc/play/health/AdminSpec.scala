@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 HM Revenue & Customs
+ * Copyright 2016 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,38 +16,47 @@
 
 package uk.gov.hmrc.play.health
 
-import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
-import org.scalatest.{WordSpec, ShouldMatchers, FunSpec}
+import org.scalatest.{ConfigMap, TestData}
+import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
+import play.api.Application
+import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.routing.Router
+import play.api.test.Helpers._
 import play.api.test._
-import play.api.libs.ws.{Response, WS}
 
-class AdminSpec extends WordSpec with ShouldMatchers with PlayRunners with ScalaFutures with DefaultAwaitTimeout with IntegrationPatience {
+import scala.concurrent.Await
 
-  trait Resource {
-    this: WithServer =>
-    def resource(path: String) = WS.url(s"http://localhost:$port" + path).get().futureValue
+class AdminSpec extends PlaySpec with OneAppPerTest {
+
+  implicit override def newAppForTest(testData: TestData): Application =
+    new GuiceApplicationBuilder()
+      .configure(testData.configMap ++ Map("application.router" -> "health.Routes"))
+      .build()
+
+  override def testDataFor(testName: String, theConfigMap: ConfigMap): TestData = {
+    if ("The details endpoint should respond with a 200 when service is configured with an appName" == testName) {
+      super.testDataFor(testName, theConfigMap + ("appName" -> "play-health"))
+    } else super.testDataFor(testName, theConfigMap)
   }
 
-  val testConfig = Map("application.router" -> "health.Routes")
-
-  abstract class ServerWithConfig(conf: Map[String, String] = Map.empty) extends
-    WithServer(FakeApplication(additionalConfiguration = testConfig ++ conf)) with Resource
-
-  "The Ping endpoint" should {
-    "respond with a 200 status code when the service is OK" in new ServerWithConfig(Map("application.router" -> "health.Routes")) {
-      resource("/ping/ping").status shouldBe 200
+  "The Ping endpoint" must {
+    "respond with a 200 status code when the service is OK" in {
+      status(route(app, FakeRequest("GET", "/ping/ping")).get) must be (200)
     }
   }
 
   "The details endpoint" should {
-    "respond with a 200 when service is configured with an appName" in
-      new ServerWithConfig(Map("appName" -> "play-health", "application.router" -> "health.Routes")) {
-        resource("/admin/details").status shouldBe 200
-      }
+    "respond with a 200 when service is configured with an appName" in {
+      val res = route(app, FakeRequest("GET", "/admin/details")).get
+      status(res) must be (200)
+    }
 
-    "respond with a 500 status code when an 'appName' value is not present in the config" in
-      new ServerWithConfig(Map("application.router" -> "health.Routes")) {
-        resource("/admin/details").status shouldBe 500
+    "respond with a 500 status code when an 'appName' value is not present in the config" in {
+      val thrown = intercept[IllegalArgumentException] {
+        val res = route(app, FakeRequest("GET", "/admin/details")).get
+        Await.result(res, defaultAwaitTimeout.duration)
       }
+      thrown.getMessage must be ("no config value for key 'appName'")
+    }
   }
 }
