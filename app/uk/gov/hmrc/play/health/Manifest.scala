@@ -18,14 +18,17 @@ package uk.gov.hmrc.play.health
 
 import java.util.jar
 
-import play.api.Play
+import play.api.Environment
+
 import collection.JavaConversions._
 
 trait Manifest {
 
-  import play.api.Play.current
+  val env : Environment
 
   protected def appName:String
+
+  private lazy val resources = env.resource("META-INF/MANIFEST.MF")
 
   lazy val contents: Map[String, String] = resources.foldLeft(Map.empty[String, String]) { (map, url) =>
     val manifest = new java.util.jar.Manifest(url.openStream())
@@ -37,8 +40,6 @@ trait Manifest {
       map
     }
   }
-
-  private val resources = Play.application.classloader.getResources("META-INF/MANIFEST.MF")
 
   private def isApplicationManifest(manifest: jar.Manifest) =
     appName == manifest.getMainAttributes.getValue("Implementation-Title")
