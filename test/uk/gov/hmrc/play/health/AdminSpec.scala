@@ -20,7 +20,6 @@ import org.scalatest.{ConfigMap, TestData}
 import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
 import play.api.Application
 import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.routing.Router
 import play.api.test.Helpers._
 import play.api.test._
 
