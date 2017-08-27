@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.play.health
 
-import org.scalatest.{ConfigMap, TestData}
+import org.scalatest._
 import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
 import play.api.Application
 import play.api.inject.guice.GuiceApplicationBuilder
