@@ -16,13 +16,12 @@
 
 package uk.gov.hmrc.play.health
 
-import javax.inject.{Inject, Singleton}
+import javax.inject.Inject
 
 import play.api.{Configuration, Environment}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
-@Singleton
 class AdminController @Inject()(configuration: Configuration, environment: Environment) extends Controller {
 
   protected def manifest = new Manifest() {
