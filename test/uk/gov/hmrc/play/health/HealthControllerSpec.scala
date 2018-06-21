@@ -17,7 +17,8 @@
 package uk.gov.hmrc.play.health
 
 import org.scalatest._
-import org.scalatestplus.play.{OneAppPerTest, PlaySpec}
+import org.scalatestplus.play.PlaySpec
+import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import play.api.Application
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.Helpers._
@@ -25,7 +26,7 @@ import play.api.test._
 
 import scala.concurrent.Await
 
-class AdminSpec extends PlaySpec with OneAppPerTest {
+class HealthControllerSpec extends PlaySpec with GuiceOneAppPerTest {
 
   implicit override def newAppForTest(testData: TestData): Application =
     new GuiceApplicationBuilder()

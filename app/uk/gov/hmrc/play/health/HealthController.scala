@@ -22,13 +22,13 @@ import play.api.{Configuration, Environment}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
-class AdminController @Inject()(configuration: Configuration, environment: Environment) extends Controller {
+class HealthController @Inject()(configuration: Configuration, environment: Environment) extends Controller {
 
   protected def manifest = new Manifest() {
 
     override val env = environment
 
-    def appName = configuration.getString("appName").getOrElse{
+    def appName: String = configuration.getOptional[String]("appName").getOrElse{
       throw new IllegalArgumentException("no config value for key 'appName'")
     }
   }

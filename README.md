@@ -1,4 +1,4 @@
-#Play Health Plugin
+# Play Health Plugin
 
 [![Apache-2.0 license](http://img.shields.io/badge/license-Apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -7,7 +7,7 @@
 
 Plugin to provide common health check functionality for Play +2.2.3 projects.
 
-##Endpoints
+## Endpoints
 
 This adds two endpoints:
 
@@ -16,26 +16,30 @@ This adds two endpoints:
 	 /admin/details - Returns information about the running service
 ```
 
-##Setup
+## Setup
 
 Add the jar to the projects dependencies:
 
 ```
     "uk.gov.hmrc" %% "play-health" % "[INSERT VERSION]"
 ```
-For Java 7 use versions <= 0.8.0
-
-Add plugin to play.plugins:
-
-```
-    {priority}:uk.gov.hmrc.play.health.HealthPlugin
-```
 
 Additionally, add the following to the routes file:
 
 ```
-    ->     /                                    health.Routes
+    ->     /                                    health.Routesgs
 ```
+
+## Compatibility
+
+| Release | Play | Scala |
+|:--------|:-----|:------|
+| 3.x.x   | 2.6  | 2.12  |
+| 3.x.x   | 2.6  | 2.11  |
+| 2.x.x   | 2.5  | 2.11  |
+| 1.x.x   | 2.3  | 2.11  |
+
+
 
 ## Configuration
 

@@ -20,11 +20,11 @@ import java.util.jar
 
 import play.api.Environment
 
-import collection.JavaConversions._
+import scala.collection.JavaConversions._
 
 trait Manifest {
 
-  val env : Environment
+  def env : Environment
 
   protected def appName:String
 
