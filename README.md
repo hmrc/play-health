@@ -13,7 +13,7 @@ This adds two endpoints:
 
 ```
      /ping/ping     - Returns 200 and an empty body
-	 /admin/details - Returns information about the running service
+     /admin/details - Returns information about the running service
 ```
 
 ## Setup
@@ -27,7 +27,7 @@ Add the jar to the projects dependencies:
 Additionally, add the following to the routes file:
 
 ```
-    ->     /                                    health.Routesgs
+    ->     /                          health.Routes
 ```
 
 ## Compatibility
