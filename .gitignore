@@ -15,3 +15,5 @@ dist
 /RUNNING_PID
 /.settings
 **.orig
+
+*.DS_Store

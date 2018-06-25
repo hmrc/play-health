@@ -33,22 +33,21 @@ class HealthControllerSpec extends PlaySpec with GuiceOneAppPerTest {
       .configure(testData.configMap ++ Map("application.router" -> "health.Routes"))
       .build()
 
-  override def testDataFor(testName: String, theConfigMap: ConfigMap): TestData = {
+  override def testDataFor(testName: String, theConfigMap: ConfigMap): TestData =
     if ("The details endpoint should respond with a 200 when service is configured with an appName" == testName) {
       super.testDataFor(testName, theConfigMap + ("appName" -> "play-health"))
     } else super.testDataFor(testName, theConfigMap)
-  }
 
   "The Ping endpoint" must {
     "respond with a 200 status code when the service is OK" in {
-      status(route(app, FakeRequest("GET", "/ping/ping")).get) must be (200)
+      status(route(app, FakeRequest("GET", "/ping/ping")).get) must be(200)
     }
   }
 
   "The details endpoint" should {
     "respond with a 200 when service is configured with an appName" in {
       val res = route(app, FakeRequest("GET", "/admin/details")).get
-      status(res) must be (200)
+      status(res) must be(200)
     }
 
     "respond with a 500 status code when an 'appName' value is not present in the config" in {
@@ -56,7 +55,7 @@ class HealthControllerSpec extends PlaySpec with GuiceOneAppPerTest {
         val res = route(app, FakeRequest("GET", "/admin/details")).get
         Await.result(res, defaultAwaitTimeout.duration)
       }
-      thrown.getMessage must be ("no config value for key 'appName'")
+      thrown.getMessage must be("no config value for key 'appName'")
     }
   }
 }

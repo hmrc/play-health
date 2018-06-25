@@ -18,17 +18,21 @@ package uk.gov.hmrc.play.health
 
 import javax.inject.Inject
 
-import play.api.{Configuration, Environment}
 import play.api.libs.json.Json
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{BaseController, ControllerComponents}
+import play.api.{Configuration, Environment}
 
-class HealthController @Inject()(configuration: Configuration, environment: Environment) extends Controller {
+class HealthController @Inject()(
+  configuration: Configuration,
+  environment: Environment,
+  val controllerComponents: ControllerComponents)
+    extends BaseController {
 
   protected def manifest = new Manifest() {
 
     override val env = environment
 
-    def appName: String = configuration.getOptional[String]("appName").getOrElse{
+    def appName: String = configuration.getOptional[String]("appName").getOrElse {
       throw new IllegalArgumentException("no config value for key 'appName'")
     }
   }

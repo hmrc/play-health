@@ -24,17 +24,17 @@ import scala.collection.JavaConversions._
 
 trait Manifest {
 
-  def env : Environment
+  def env: Environment
 
-  protected def appName:String
+  protected def appName: String
 
   private lazy val resources = env.resource("META-INF/MANIFEST.MF")
 
   lazy val contents: Map[String, String] = resources.foldLeft(Map.empty[String, String]) { (map, url) =>
     val manifest = new java.util.jar.Manifest(url.openStream())
     if (map.isEmpty && isApplicationManifest(manifest)) {
-      manifest.getMainAttributes.toMap.map {
-        t => t._1.toString -> t._2.toString
+      manifest.getMainAttributes.toMap.map { t =>
+        t._1.toString -> t._2.toString
       }
     } else {
       map
