@@ -3,10 +3,10 @@ resolvers += Resolver.url("hmrc-sbt-plugin-releases",
 
 resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 
-resolvers += "Typesafe repository mvn" at "http://repo.typesafe.com/typesafe/maven-releases/"
-
-addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.8.0")
-
-addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "0.9.0")
-
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.15")
+
+addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.12.0")
+
+addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "1.7.0")
+
+addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "0.13.0")

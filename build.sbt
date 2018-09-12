@@ -3,7 +3,11 @@ import uk.gov.hmrc.DefaultBuildSettings.targetJvm
 val libName = "play-health"
 
 lazy val library = Project(libName, file("."))
-  .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning)
+  .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
+  .settings(
+    makePublicallyAvailableOnBintray := true,
+    majorVersion                     := 3
+  )
   .settings(
     name := libName,
     scalaVersion := "2.11.12",
