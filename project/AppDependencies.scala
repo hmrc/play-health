@@ -1,18 +1,23 @@
+import play.core.PlayVersion
 import sbt._
+import uk.gov.hmrc.Dependencies
 
 object AppDependencies {
 
-  import play.core.PlayVersion
-  import play.sbt.PlayImport._
-
   val compile = Seq(
-    "com.typesafe.play" %% "play" % PlayVersion.current,
-    ws                  % "provided"
+    "com.typesafe.play" %% "play" % PlayVersion.current
   )
 
-  val test = Seq(
-    "org.scalatest"          %% "scalatest"          % "3.0.3" % "test",
-    "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % "test",
-    "org.pegdown"            % "pegdown"             % "1.6.0" % "test"
+  val test = Dependencies(
+    common = Seq(
+      "org.pegdown"            % "pegdown"             % "1.6.0" % Test,
+      "org.scalatest"          %% "scalatest"          % "3.0.5" % Test
+    ),
+    play25 = Seq(
+      "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % Test
+    ),
+    play26 = Seq(
+      "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+    )
   )
 }

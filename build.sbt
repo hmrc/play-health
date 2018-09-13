@@ -1,9 +1,12 @@
+import play.sbt.PlayImport.PlayKeys._
 import uk.gov.hmrc.DefaultBuildSettings.targetJvm
+import uk.gov.hmrc.PlayCrossCompilation
 
 val libName = "play-health"
 
 lazy val library = Project(libName, file("."))
   .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
+  .disablePlugins(PlayLayoutPlugin)
   .settings(
     makePublicallyAvailableOnBintray := true,
     majorVersion                     := 3
@@ -16,5 +19,7 @@ lazy val library = Project(libName, file("."))
     resolvers := Seq(
       Resolver.bintrayRepo("hmrc", "releases"),
       Resolver.typesafeRepo("releases")
-    )
+    ),
+    playMonitoredFiles ++= (sourceDirectories in (Compile, TwirlKeys.compileTemplates)).value,
+    PlayCrossCompilation()
   )

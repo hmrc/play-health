@@ -25,6 +25,7 @@ import play.api.test.Helpers._
 import play.api.test._
 
 import scala.concurrent.Await
+import scala.language.implicitConversions
 
 class HealthControllerSpec extends PlaySpec with GuiceOneAppPerTest {
 

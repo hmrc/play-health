@@ -17,22 +17,17 @@
 package uk.gov.hmrc.play.health
 
 import javax.inject.Inject
-
-import play.api.libs.json.Json
-import play.api.mvc.{BaseController, ControllerComponents}
+import play.api.libs.json.Json.toJson
+import play.api.mvc.{Action, Controller}
 import play.api.{Configuration, Environment}
 
-class HealthController @Inject()(
-  configuration: Configuration,
-  environment: Environment,
-  val controllerComponents: ControllerComponents)
-    extends BaseController {
+class HealthController @Inject()(configuration: Configuration, environment: Environment) extends Controller {
 
-  protected def manifest = new Manifest() {
+  private lazy val manifest: Manifest = new Manifest() {
 
     override val env = environment
 
-    def appName: String = configuration.getOptional[String]("appName").getOrElse {
+    lazy val appName = configuration.getString("appName").getOrElse {
       throw new IllegalArgumentException("no config value for key 'appName'")
     }
   }
@@ -42,7 +37,7 @@ class HealthController @Inject()(
   }
 
   def details() = Action {
-    Ok(Json.toJson(manifest.contents))
+    Ok(toJson(manifest.contents))
   }
 
   def detail(name: String) = Action {
