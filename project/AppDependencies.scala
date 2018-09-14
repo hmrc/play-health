@@ -1,6 +1,6 @@
 import play.core.PlayVersion
 import sbt._
-import uk.gov.hmrc.Dependencies
+import uk.gov.hmrc.crossPlayDependencies
 
 object AppDependencies {
 
@@ -8,7 +8,7 @@ object AppDependencies {
     "com.typesafe.play" %% "play" % PlayVersion.current
   )
 
-  val test = Dependencies(
+  val test = crossPlayDependencies(
     common = Seq(
       "org.pegdown"            % "pegdown"             % "1.6.0" % Test,
       "org.scalatest"          %% "scalatest"          % "3.0.5" % Test
