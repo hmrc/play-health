@@ -31,7 +31,7 @@ class HealthControllerSpec extends PlaySpec with GuiceOneAppPerTest {
 
   implicit override def newAppForTest(testData: TestData): Application =
     new GuiceApplicationBuilder()
-      .configure(testData.configMap ++ Map("application.router" -> "health.Routes"))
+      .configure(testData.configMap ++ Map("play.http.router" -> "health.Routes"))
       .build()
 
   override def testDataFor(testName: String, theConfigMap: ConfigMap): TestData =

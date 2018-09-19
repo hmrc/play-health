@@ -1,7 +1,7 @@
+import PlayCrossCompilation._
 import play.sbt.PlayImport.PlayKeys._
 import uk.gov.hmrc.DefaultBuildSettings.targetJvm
-import uk.gov.hmrc.PlayCrossCompilation
-import uk.gov.hmrc.PlayCrossCompilation.Play25
+import uk.gov.hmrc.playcrosscompilation.PlayVersion.Play25
 
 val libName = "play-health"
 
@@ -23,8 +23,8 @@ lazy val library = Project(libName, file("."))
     ),
     playMonitoredFiles ++= (sourceDirectories in (Compile, TwirlKeys.compileTemplates)).value,
     routesGenerator    := {
-      if (PlayCrossCompilation.playVersion == Play25) StaticRoutesGenerator
+      if (playVersion == Play25) StaticRoutesGenerator
       else InjectedRoutesGenerator
     },
-    PlayCrossCompilation()
+    playCrossCompilationSettings
   )
