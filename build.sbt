@@ -16,7 +16,7 @@ lazy val library = Project(libName, file("."))
     name := libName,
     scalaVersion := "2.11.12",
     targetJvm := "jvm-1.8",
-    libraryDependencies ++= AppDependencies.compile ++ AppDependencies.test,
+    libraryDependencies ++= LibDependencies.compile ++ LibDependencies.test,
     resolvers := Seq(
       Resolver.bintrayRepo("hmrc", "releases"),
       Resolver.typesafeRepo("releases")
