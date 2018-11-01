@@ -21,7 +21,7 @@ This adds two endpoints:
 Add the HMRC bintray repo to the resolvers:
 
 ```
-resolvers += Resolver.bintrayRepo("hmrc", "releases")
+    resolvers += Resolver.bintrayRepo("hmrc", "releases")
 ```
 
 Add the jar to the projects dependencies:
