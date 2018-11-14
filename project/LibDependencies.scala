@@ -20,4 +20,5 @@ object LibDependencies {
       "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
     )
   )
+
 }
