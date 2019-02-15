@@ -15,6 +15,7 @@ lazy val library = Project(libName, file("."))
   .settings(
     name := libName,
     scalaVersion := "2.11.12",
+    crossScalaVersions := List("2.11.12", "2.12.8"),
     targetJvm := "jvm-1.8",
     libraryDependencies ++= LibDependencies.compile ++ LibDependencies.test,
     resolvers := Seq(
