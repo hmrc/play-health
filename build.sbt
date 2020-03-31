@@ -5,6 +5,14 @@ import uk.gov.hmrc.playcrosscompilation.PlayVersion.Play25
 
 val libName = "play-health"
 
+ def loadObject[T](objectName: String): T = {
+   import scala.reflect.runtime.universe
+   val runtimeMirror = universe.runtimeMirror(getClass.getClassLoader)
+   val module = runtimeMirror.staticModule(objectName)
+   val obj = runtimeMirror.reflectModule(module)
+   obj.instance.asInstanceOf[T]
+ }
+
 lazy val library = Project(libName, file("."))
   .enablePlugins(play.sbt.PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
   .disablePlugins(PlayLayoutPlugin)
@@ -24,7 +32,7 @@ lazy val library = Project(libName, file("."))
     ),
     playMonitoredFiles ++= (sourceDirectories in (Compile, TwirlKeys.compileTemplates)).value,
     routesGenerator    := {
-      if (playVersion == Play25) StaticRoutesGenerator
+      if (playVersion == Play25) loadObject[play.routes.compiler.RoutesGenerator]("play.routes.compiler.StaticRoutesGenerator") // not available on classpath with Play_27
       else InjectedRoutesGenerator
     },
     playCrossCompilationSettings
