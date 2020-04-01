@@ -20,7 +20,7 @@ import java.util.jar
 
 import play.api.Environment
 
-import scala.collection.JavaConversions._
+import collection.JavaConverters._
 
 trait Manifest {
 
@@ -30,16 +30,16 @@ trait Manifest {
 
   private lazy val resources = env.resource("META-INF/MANIFEST.MF")
 
-  lazy val contents: Map[String, String] = resources.foldLeft(Map.empty[String, String]) { (map, url) =>
-    val manifest = new java.util.jar.Manifest(url.openStream())
-    if (map.isEmpty && isApplicationManifest(manifest)) {
-      manifest.getMainAttributes.toMap.map { t =>
-        t._1.toString -> t._2.toString
-      }
-    } else {
-      map
+  lazy val contents: Map[String, String] =
+    resources.foldLeft(Map.empty[String, String]) { (map, url) =>
+      val manifest = new java.util.jar.Manifest(url.openStream())
+      if (map.isEmpty && isApplicationManifest(manifest)) {
+        manifest.getMainAttributes.asScala.toMap.map { case (k, v) =>
+          k.toString -> v.toString
+        }
+      } else
+        map
     }
-  }
 
   private def isApplicationManifest(manifest: jar.Manifest) =
     appName == manifest.getMainAttributes.getValue("Implementation-Title")
