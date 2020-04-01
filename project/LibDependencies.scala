@@ -26,7 +26,9 @@ object LibDependencies {
     ),
     play26 = Seq(
       "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+    ),
+    play27 = Seq(
+      "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
     )
   )
-
 }

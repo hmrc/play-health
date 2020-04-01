@@ -32,12 +32,15 @@ Additionally, add the following to the routes file:
 
 ## Compatibility
 
-| Release | Play | Scala |
-|:--------|:-----|:------|
-| 3.x.x   | 2.6  | 2.12  |
-| 3.x.x   | 2.6  | 2.11  |
-| 2.x.x   | 2.5  | 2.11  |
-| 1.x.x   | 2.3  | 2.11  |
+| Release   | Play | Scala     |
+|:----------|:-----|:----------|
+| >= 3.15.x | 2.7  | 2.11,2.12 |
+| >= 3.15.x | 2.6  | 2.11,2.12 |
+| >= 3.15.x | 2.5  | 2.11      |
+| 3.x.x     | 2.6  | 2.11,2.12 |
+| 3.x.x     | 2.5  | 2.11      |
+| 2.x.x     | 2.5  | 2.11      |
+| 1.x.x     | 2.3  | 2.11      |
 
 
 
@@ -47,6 +50,5 @@ The plugin expects to find the apps name in the `application.conf` under the key
 For the `/admin/details` endpoint to work as expected, the applications `manifest.mf` must include a key `Implementation-Title` with the same value as `appName`.
 
 ## License ##
- 
-This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
 
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").

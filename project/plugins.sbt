@@ -5,18 +5,18 @@ resolvers += Resolver.typesafeRepo("releases")
 
 resolvers += Resolver.bintrayRepo("hmrc", "releases")
 
-val playPlugin =
-  if (sys.env.get("PLAY_VERSION").exists(_ == "2.6"))
-    "com.typesafe.play" % "sbt-plugin" % "2.6.20"
-  else
-    "com.typesafe.play" % "sbt-plugin" % "2.5.19"
+addSbtPlugin(
+  sys.env.get("PLAY_VERSION") match {
+    case Some("2.6") => "com.typesafe.play" % "sbt-plugin" % "2.6.20"
+    case Some("2.7") => "com.typesafe.play" % "sbt-plugin" % "2.7.4"
+    case _           => "com.typesafe.play" % "sbt-plugin" % "2.5.19" // since PlayCrossCompilation.defaultPlayVersion is 2.5
+  }
+)
 
-addSbtPlugin(playPlugin)
+addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "2.6.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.13.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "2.1.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "1.15.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "1.2.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "0.13.0")
-
-addSbtPlugin("uk.gov.hmrc" % "sbt-play-cross-compilation" % "0.13.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-play-cross-compilation" % "0.19.0")
