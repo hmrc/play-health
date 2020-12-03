@@ -2,7 +2,7 @@
 
 [![Apache-2.0 license](http://img.shields.io/badge/license-Apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-[![Build Status](https://travis-ci.org/hmrc/play-health.svg)](https://travis-ci.org/hmrc/play-health) [ ![Download](https://api.bintray.com/packages/hmrc/releases/play-health/images/download.svg) ](https://bintray.com/hmrc/releases/play-health/_latestVersion)
+
 
 
 Plugin to provide common health check functionality for Play +2.2.3 projects.
