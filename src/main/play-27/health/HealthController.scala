@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 HM Revenue & Customs
+ * Copyright 2021 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,22 @@
 package uk.gov.hmrc.play.health
 
 import javax.inject.Inject
+
 import play.api.libs.json.Json.toJson
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{BaseController, ControllerComponents}
 import play.api.{Configuration, Environment}
 
-class HealthController @Inject()(configuration: Configuration, environment: Environment) extends Controller {
+class HealthController @Inject()(
+  configuration: Configuration,
+  environment: Environment,
+  val controllerComponents: ControllerComponents)
+    extends BaseController {
 
-  private lazy val manifest: Manifest = new Manifest() {
+  protected def manifest = new Manifest() {
 
     override val env = environment
 
-    lazy val appName = configuration.getString("appName").getOrElse {
+    lazy val appName = configuration.getOptional[String]("appName").getOrElse {
       throw new IllegalArgumentException("no config value for key 'appName'")
     }
   }

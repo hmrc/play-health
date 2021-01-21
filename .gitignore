@@ -15,5 +15,8 @@ dist
 /RUNNING_PID
 /.settings
 **.orig
-
+.bloop/
+.metals/
+.vscode/
 *.DS_Store
+metals.sbt
