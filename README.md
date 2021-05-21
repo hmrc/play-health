@@ -2,8 +2,13 @@
 
 [![Apache-2.0 license](http://img.shields.io/badge/license-Apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
+----
+## Deprecation Warning
 
+Play Health is no longer maintained. The common health check functionality comes with bootstrap.
 
+Please ensure you are using the latest [bootstrap-play](https://github.com/hmrc/bootstrap-play) and remove the dependency on Play Health.
+----
 
 Plugin to provide common health check functionality for Play +2.2.3 projects.
 
