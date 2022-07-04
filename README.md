@@ -1,5 +1,8 @@
 # Play Health Plugin
 
+## This library is deprecated now. Please use [bootstrap-play](https://github.com/hmrc/bootstrap-play)
+
+
 [![Apache-2.0 license](http://img.shields.io/badge/license-Apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 
